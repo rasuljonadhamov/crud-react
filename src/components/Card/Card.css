@@ -1,10 +1,60 @@
-
-
 .card {
   width: 300px;
   height: 300px;
-  padding: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
   -webkit-box-shadow: -6px 12px 16px 6px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: -6px 12px 16px 6px rgba(34, 60, 80, 0.2);
   box-shadow: -6px 12px 16px 6px rgba(34, 60, 80, 0.2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  row-gap: 20px;
+}
+
+.card h2 {
+  margin: 10px 0;
+  color: red;
+}
+
+.card p {
+  margin: 10px 0;
+}
+
+.card h3 {
+  margin: 10px 0;
+  color: gray;
+}
+
+.card span {
+  background-color: blue;
+  color: #fff;
+  padding: 10px;
+  width: 30%;
+  margin: 10px auto;
+  margin-bottom: 30px;
+  border-radius: 10px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-mode input,
+.edit-mode button {
+  margin: 5px;
+  padding: 5px;
+}
+
+.display-mode {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-group button {
+  margin-right: 5px;
 }

@@ -14,7 +14,7 @@ function App() {
       .then((res) => res.json())
       .then((json) => {
         setData(json);
-        console.log(json);
+        // console.log(json);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -30,7 +30,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (submitted && form.name && form.price) {
+    if (submitted) {
       fetch("https://auth-rg69.onrender.com/api/products/", {
         method: "POST",
         headers: {
@@ -38,10 +38,11 @@ function App() {
         },
         body: JSON.stringify(form),
       })
-        // .then((res) => res.json())
+        .then((res) => res.json())
         .then((json) => {
           console.log(json, "skj");
           setForm([...data, json]);
+          setData([...data, json]);
           setForm({});
           setSubmitted(false);
           setShowSuccessMessage(true);
@@ -52,7 +53,7 @@ function App() {
         })
         .catch((err) => console.log("Error while submitting data", err));
     }
-  }, [submitted, form]);
+  }, [submitted]);
 
   const handleDelete = (id) => {
     fetch(`https://auth-rg69.onrender.com/api/products/${id}`, {
@@ -64,8 +65,39 @@ function App() {
       .catch((err) => console.log("Error deleting item", err));
   };
 
+  const handleUpdate = (updatedItem) => {
+    fetch(`https://auth-rg69.onrender.com/api/products/${updatedItem.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedItem),
+    })
+      .then(() => {
+        fetchData(); // Refresh data after update
+      })
+      .catch((err) => console.log("Error updating item", err));
+  };
+
   const handleSubmit = () => {
-    setSubmitted(true);
+    fetch("https://auth-rg69.onrender.com/api/products/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json, "skj");
+        setForm({});
+        setSubmitted(true);
+        setShowSuccessMessage(true);
+        setTimeout(() => {
+          setShowSuccessMessage(false);
+        }, 3000);
+      })
+      .catch((err) => console.log("Error while submitting data", err));
   };
 
   return (
@@ -81,7 +113,12 @@ function App() {
       <div className="card-wrapper">
         {data.length > 0 ? (
           data.map((item) => (
-            <Card data={item} key={item.id} onDelete={handleDelete} />
+            <Card
+              data={item}
+              key={item.id}
+              onDelete={handleDelete}
+              onUpdate={handleUpdate}
+            />
           ))
         ) : (
           <p>Loading...</p>

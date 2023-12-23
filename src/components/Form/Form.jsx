@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import "./Form.css";
 
-function InputForm({ formValue, setFormValue }) {
+function InputForm({ formValue, setFormValue, onSubmit }) {
   let nameRef = useRef("");
   let priceRef = useRef("");
   let descRef = useRef("");
@@ -31,12 +31,14 @@ function InputForm({ formValue, setFormValue }) {
       status: statusRef.current.value,
       description: descRef.current.value,
     });
+
+    onSubmit(); // Invoke onSubmit from props
     console.log("Submitted");
   };
 
   return (
     <div className="input-form-container">
-      <form onSubmit={(e) => handleFormSubmit(e)}>
+      <form onSubmit={handleFormSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name:</label>
           <input type="text" id="name" ref={nameRef} />
