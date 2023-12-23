@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Card.css";
 
 function Card({ data, onDelete, onUpdate }) {
@@ -25,7 +25,7 @@ function Card({ data, onDelete, onUpdate }) {
 
   const toggleEditMode = () => {
     setEditMode(!editMode);
-    setUpdatedData({ ...data }); // Reset to original data if canceling edit
+    setUpdatedData({ ...data });
   };
 
   return (

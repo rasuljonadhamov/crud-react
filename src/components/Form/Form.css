@@ -1,13 +1,11 @@
-/* Example CSS Styles */
 .active-option {
-  color: green; /* Style for active option */
+  color: green;
 }
 
 .inactive-option {
-  color: red; /* Style for inactive option */
+  color: red;
 }
 
-/* Additional styles for form elements (adjust as needed) */
 .input-form-container {
   max-width: 400px;
   margin: 0 auto;

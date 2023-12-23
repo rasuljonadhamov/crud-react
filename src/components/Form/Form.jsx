@@ -31,9 +31,12 @@ function InputForm({ formValue, setFormValue, onSubmit }) {
       status: statusRef.current.value,
       description: descRef.current.value,
     });
+    nameRef.current.value = "";
+    priceRef.current.value = "";
+    statusRef.current.value = "";
+    descRef.current.value = "";
 
-    onSubmit(); // Invoke onSubmit from props
-    console.log("Submitted");
+    onSubmit();
   };
 
   return (

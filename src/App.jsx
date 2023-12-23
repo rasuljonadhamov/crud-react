@@ -14,7 +14,6 @@ function App() {
       .then((res) => res.json())
       .then((json) => {
         setData(json);
-        // console.log(json);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -31,6 +30,7 @@ function App() {
 
   useEffect(() => {
     if (submitted) {
+      console.log("effect ishladi");
       fetch("https://auth-rg69.onrender.com/api/products/", {
         method: "POST",
         headers: {
@@ -40,8 +40,6 @@ function App() {
       })
         .then((res) => res.json())
         .then((json) => {
-          console.log(json, "skj");
-          setForm([...data, json]);
           setData([...data, json]);
           setForm({});
           setSubmitted(false);
@@ -53,7 +51,7 @@ function App() {
         })
         .catch((err) => console.log("Error while submitting data", err));
     }
-  }, [submitted]);
+  }, [form]);
 
   const handleDelete = (id) => {
     fetch(`https://auth-rg69.onrender.com/api/products/${id}`, {
@@ -80,24 +78,9 @@ function App() {
   };
 
   const handleSubmit = () => {
-    fetch("https://auth-rg69.onrender.com/api/products/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json, "skj");
-        setForm({});
-        setSubmitted(true);
-        setShowSuccessMessage(true);
-        setTimeout(() => {
-          setShowSuccessMessage(false);
-        }, 3000);
-      })
-      .catch((err) => console.log("Error while submitting data", err));
+    setSubmitted(true);
+
+    console.log(form);
   };
 
   return (
